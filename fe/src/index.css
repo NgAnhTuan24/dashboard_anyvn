@@ -1,4 +1,3 @@
-/* Reset CSS cơ bản */
 * {
   margin: 0;
   padding: 0;
@@ -11,13 +10,13 @@ body {
   color: #333;
 }
 
-/* Layout chính sử dụng Flexbox */
+/* Khung của cả trang dashboard */
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* Sidebar Styling */
+/* Phần Sidebar - start */
 .sidebar {
   width: 260px;
   background-color: #2c3e50;
@@ -26,23 +25,23 @@ body {
   flex-direction: column;
   position: fixed;
   height: 100vh;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Thêm đổ bóng cho tách biệt */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
 .menu-list {
-  flex: 1; /* Chiếm hết không gian trống ở giữa để đẩy footer xuống */
+  flex: 1; 
   list-style: none;
   padding: 0;
 }
 
 .logo {
-  padding: 20px 20px; /* Tăng padding trên dưới để tạo khoảng thở */
+  padding: 20px 20px;
   font-size: 22px;
   font-weight: 800;
   color: #3498db;
   text-transform: uppercase;
   letter-spacing: 2px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Dòng kẻ mờ ngăn cách */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 20px;
 }
 
@@ -54,7 +53,7 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Link bên trong Sidebar */
+
 .sidebar ul li a {
   display: block;
   padding: 15px 25px;
@@ -65,14 +64,14 @@ body {
   transition: 0.3s;
 }
 
-/* Hiệu ứng Hover */
+
 .sidebar ul li:hover a {
   color: white;
   background-color: #34495e;
-  padding-left: 35px; /* Hiệu ứng đẩy sang phải nhẹ */
+  padding-left: 35px;
 }
 
-/* Menu đang hoạt động (Active) */
+
 .sidebar ul li.active {
   background-color: #3498db;
   border-left: 5px solid #fff;
@@ -82,29 +81,53 @@ body {
   color: white;
   font-weight: bold;
 }
+/* end */
 
+/* phần nút đăng nhập/đăng xuất - start */
 .sidebar-footer {
   padding: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: auto; /* Đảm bảo luôn nằm ở đáy */
+  margin-top: auto;
 }
 
-.login-btn {
+/* Base style cho nút ở Sidebar */
+.btn-auth {
   display: block;
-  text-align: center;
-  background-color: #e74c3c; /* Màu đỏ cho nổi bật hoặc #3498db nếu muốn màu xanh */
-  color: white;
-  text-decoration: none;
+  width: 100%;
   padding: 12px;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.3s;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
 }
 
-.login-btn:hover {
-  background-color: #c0392b;
+/* Nút Đăng nhập (Màu xanh) */
+.login-style {
+  background-color: #3498db;
   color: white;
 }
+
+.login-style:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Nút Đăng xuất (Màu đỏ) */
+.logout-style {
+  background-color: rgba(231, 76, 60, 0.1); /* Nền đỏ nhạt trong suốt */
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.logout-style:hover {
+  background-color: #e74c3c;
+  color: white;
+}
+/* end */
 
 /* Content Area - Khu vực hiển thị nội dung */
 .content {

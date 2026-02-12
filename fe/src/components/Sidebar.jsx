@@ -1,10 +1,27 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login");
+  };
 
   const menu = [
-    { name: "Trang tổng quan", path: "/" },
+    { name: "Tổng quan", path: "/" },
     { name: "Quản lý nhân viên", path: "/staffs" },
     { name: "Quản lý khách hàng", path: "/customers" },
     { name: "Quản lý sản phẩm", path: "/products" },
@@ -27,9 +44,15 @@ export default function Sidebar() {
       </ul>
 
       <div className="sidebar-footer">
-        <Link to="/login" className="login-btn">
-          Đăng nhập
-        </Link>
+        {!user ? (
+          <Link to="/login" className="btn-auth login-style">
+            Đăng nhập
+          </Link>
+        ) : (
+          <button onClick={handleLogout} className="btn-auth logout-style">
+            Đăng xuất
+          </button>
+        )}
       </div>
     </div>
   );
