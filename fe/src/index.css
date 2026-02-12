@@ -29,9 +29,14 @@ body {
   box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Thêm đổ bóng cho tách biệt */
 }
 
+.menu-list {
+  flex: 1; /* Chiếm hết không gian trống ở giữa để đẩy footer xuống */
+  list-style: none;
+  padding: 0;
+}
+
 .logo {
   padding: 20px 20px; /* Tăng padding trên dưới để tạo khoảng thở */
-  text-align: center;
   font-size: 22px;
   font-weight: 800;
   color: #3498db;
@@ -76,6 +81,29 @@ body {
 .sidebar ul li.active a {
   color: white;
   font-weight: bold;
+}
+
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto; /* Đảm bảo luôn nằm ở đáy */
+}
+
+.login-btn {
+  display: block;
+  text-align: center;
+  background-color: #e74c3c; /* Màu đỏ cho nổi bật hoặc #3498db nếu muốn màu xanh */
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.login-btn:hover {
+  background-color: #c0392b;
+  color: white;
 }
 
 /* Content Area - Khu vực hiển thị nội dung */

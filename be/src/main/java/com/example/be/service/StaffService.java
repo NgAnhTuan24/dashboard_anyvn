@@ -1,6 +1,8 @@
 package com.example.be.service;
 
 import com.example.be.dto.CreateStaffRequest;
+import com.example.be.dto.LoginRequest;
+import com.example.be.dto.LoginResponse;
 import com.example.be.dto.StaffResponse;
 import com.example.be.entity.Staff;
 import com.example.be.repository.StaffRepository;
@@ -55,5 +57,26 @@ public class StaffService {
         response.setStatus(staff.getStatus());
         response.setCreatedAt(staff.getCreatedAt());
         return response;
+    }
+
+    public LoginResponse login(LoginRequest request) {
+
+        Staff staff = staffRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Email không tồn tại"));
+
+        if (!staff.getPassword().equals(request.getPassword())) {
+            throw new RuntimeException("Sai mật khẩu");
+        }
+
+        if (staff.getStatus() != Staff.Status.ACTIVE) {
+            throw new RuntimeException("Tài khoản chưa kích hoạt");
+        }
+
+        return new LoginResponse(
+                staff.getId(),
+                staff.getFullName(),
+                staff.getEmail(),
+                staff.getRole().name()
+        );
     }
 }

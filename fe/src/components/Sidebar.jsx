@@ -15,7 +15,7 @@ export default function Sidebar() {
     <div className="sidebar">
       <h2 className="logo">Admin Page</h2>
 
-      <ul>
+      <ul className="menu-list">
         {menu.map((item) => (
           <li
             key={item.path}
@@ -26,11 +26,11 @@ export default function Sidebar() {
         ))}
       </ul>
 
-      {/* <div className="sidebar-footer">
+      <div className="sidebar-footer">
         <Link to="/login" className="login-btn">
           Đăng nhập
         </Link>
-      </div> */}
+      </div>
     </div>
   );
 }
