@@ -18,12 +18,17 @@ public class StaffController {
     }
 
     @GetMapping
-    public List<StaffResponse> getAll() {
-        return staffService.getAllStaff();
+    public List<StaffResponse> getAllStaffs() {
+        return staffService.getAllStaffs();
     }
 
     @PostMapping
-    public StaffResponse create(@RequestBody CreateStaffRequest request) {
+    public StaffResponse createStaff(@RequestBody CreateStaffRequest request) {
         return staffService.createStaff(request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        staffService.deleteStaff(id);
     }
 }

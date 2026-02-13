@@ -1,18 +1,19 @@
-const BASE_URL = "http://localhost:8080/api/auth";
+import axios from "axios";
 
-export async function loginApi(payload) {
-  const response = await fetch(`${BASE_URL}/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+const API_URL = "http://localhost:8080/api/auth";
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || "Đăng nhập thất bại");
+export const loginApi = async (payload) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/login`,
+      payload
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+      "Sai email hoặc mật khẩu"
+    );
   }
-
-  return response.json();
-}
+};

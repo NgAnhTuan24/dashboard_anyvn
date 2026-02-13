@@ -21,7 +21,7 @@ public class StaffService {
         this.staffRepository = staffRepository;
     }
 
-    public List<StaffResponse> getAllStaff() {
+    public List<StaffResponse> getAllStaffs() {
 
         List<Staff> staffs = staffRepository.findByRole(Staff.Role.STAFF);
 
@@ -57,6 +57,12 @@ public class StaffService {
         response.setStatus(staff.getStatus());
         response.setCreatedAt(staff.getCreatedAt());
         return response;
+    }
+
+    public void deleteStaff(Long id) {
+        Staff staff = staffRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy nhân viên"));
+
+        staffRepository.delete(staff);
     }
 
     public LoginResponse login(LoginRequest request) {

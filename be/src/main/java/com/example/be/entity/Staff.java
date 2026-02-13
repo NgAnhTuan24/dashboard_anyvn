@@ -30,21 +30,7 @@ public class Staff {
     private Status status = Status.INACTIVE;
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        status = (status == null) ? Status.INACTIVE : status;
-        role = (role == null) ? Role.STAFF : role;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
+    private LocalDateTime createdAt = LocalDateTime.now();;
 
     public enum Role {
         ADMIN,
@@ -110,13 +96,5 @@ public class Staff {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
