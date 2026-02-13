@@ -33,7 +33,7 @@ public class StaffService {
     public StaffResponse createStaff(CreateStaffRequest request) {
 
         if (staffRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new RuntimeException("Email đã tồn tại");
         }
 
         Staff staff = new Staff();
@@ -59,6 +59,15 @@ public class StaffService {
         return response;
     }
 
+    public StaffResponse updateStatus(Long id, Staff.Status status) {
+        Staff staff = staffRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy nhân viên"));
+
+        staff.setStatus(status);
+
+        return mapToResponse(staffRepository.save(staff));
+    }
+
     public void deleteStaff(Long id) {
         Staff staff = staffRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy nhân viên"));
 
@@ -75,7 +84,7 @@ public class StaffService {
         }
 
         if (staff.getStatus() != Staff.Status.ACTIVE) {
-            throw new RuntimeException("Tài khoản chưa kích hoạt");
+            throw new RuntimeException("Tài khoản bị khóa");
         }
 
         return new LoginResponse(
