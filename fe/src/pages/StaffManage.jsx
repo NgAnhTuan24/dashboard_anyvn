@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { getAllStaffApi, deleteStaffApi } from "../services/staffApi";
 import "../styles/StaffManage.css";
 
@@ -19,12 +20,43 @@ export default function StaffManage() {
   };
 
   const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Xác nhận xóa?",
+      text: "Hành động này không thể hoàn tác!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Xóa",
+      cancelButtonText: "Hủy",
+      reverseButtons: true
+    });
+
+    if (!result.isConfirmed) return;
+
     try {
       await deleteStaffApi(id);
       fetchStaffs();
+
+      Swal.fire({
+        icon: "success",
+        title: "Đã xóa!",
+        text: "Đã được xóa thành công.",
+        timer: 1500,
+        showConfirmButton: false
+      });
+
     } catch (error) {
-      console.error(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Lỗi!",
+        text: error.message
+      });
     }
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("vi-VN");
   };
 
   return (
@@ -63,11 +95,11 @@ export default function StaffManage() {
                 <td>{staff.fullName}</td>
                 <td>{staff.email}</td>
                 <td>
-                  <span className={`status-badge ${staff.status === "Tạm khóa" ? "locked" : "active"}`}>
-                    {staff.status}
+                  <span className={`status-badge ${staff.status === "ACTIVE" ? "active" : "inactive"}`}>
+                    {staff.status === "ACTIVE" ? "Hoạt động" : "Đã khóa"}
                   </span>
                 </td>
-                <td>{staff.createdAt}</td>
+                <td>{formatDate(staff.createdAt)}</td>
                 <td>
                   <div className="action-buttons">
                     <button className="btn-action lock">
