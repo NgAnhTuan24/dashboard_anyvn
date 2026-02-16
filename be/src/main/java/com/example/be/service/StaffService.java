@@ -5,6 +5,7 @@ import com.example.be.dto.LoginRequest;
 import com.example.be.dto.LoginResponse;
 import com.example.be.dto.StaffResponse;
 import com.example.be.entity.Staff;
+import com.example.be.mapper.StaffMapper;
 import com.example.be.repository.StaffRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class StaffService {
         List<Staff> staffs = staffRepository.findByRole(Staff.Role.STAFF);
 
         return staffs.stream()
-                .map(this::mapToResponse)
+                .map(StaffMapper::toResponse)
                 .collect(Collectors.toList());
     }
 
@@ -36,27 +37,11 @@ public class StaffService {
             throw new RuntimeException("Email đã tồn tại");
         }
 
-        Staff staff = new Staff();
-        staff.setFullName(request.getFullName());
-        staff.setEmail(request.getEmail());
-        staff.setPassword(request.getPassword());
-        staff.setRole(Staff.Role.STAFF);
-        staff.setStatus(Staff.Status.ACTIVE);
+        Staff staff = StaffMapper.toEntity(request);
 
         Staff saved = staffRepository.save(staff);
 
-        return mapToResponse(saved);
-    }
-
-    private StaffResponse mapToResponse(Staff staff) {
-        StaffResponse response = new StaffResponse();
-        response.setId(staff.getId());
-        response.setFullName(staff.getFullName());
-        response.setEmail(staff.getEmail());
-        response.setRole(staff.getRole());
-        response.setStatus(staff.getStatus());
-        response.setCreatedAt(staff.getCreatedAt());
-        return response;
+        return StaffMapper.toResponse(saved);
     }
 
     public StaffResponse updateStatus(Long id, Staff.Status status) {
@@ -65,7 +50,7 @@ public class StaffService {
 
         staff.setStatus(status);
 
-        return mapToResponse(staffRepository.save(staff));
+        return StaffMapper.toResponse(staffRepository.save(staff));
     }
 
     public void deleteStaff(Long id) {

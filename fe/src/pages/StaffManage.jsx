@@ -157,7 +157,7 @@ export default function StaffManage() {
 
       {/* Bảng dữ liệu */}
       <div className="table-responsive">
-        <table className="staff-table">
+        <table className="admin-table">
           <thead>
             <tr>
               <th>STT</th>
