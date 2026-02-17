@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { getAllStaffApi, createStaffApi, lockStaffApi, unlockStaffApi, deleteStaffApi } from "../services/staffApi";
+import {
+  getAllStaffApi,
+  createStaffApi,
+  lockStaffApi,
+  unlockStaffApi,
+  deleteStaffApi,
+} from "../services/staffApi";
 import "../styles/StaffManage.css";
 
 export default function StaffManage() {
@@ -36,29 +42,28 @@ export default function StaffManage() {
         title: "Thành công!",
         text: "Đã thêm nhân viên.",
         timer: 1500,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
 
       setIsOpenModal(false);
       setFormData({ fullName: "", email: "", password: "" });
       fetchStaffs();
-
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Lỗi!",
-        text: error.message
+        text: error.message,
       });
     }
   };
 
   const handleToggleStatus = async (staff) => {
     const isLocking = staff.status === "ACTIVE";
-    
+
     const result = await Swal.fire({
       title: isLocking ? "Xác nhận khóa?" : "Xác nhận mở khóa?",
-      text: isLocking 
-        ? `Tài khoản ${staff.fullName} sẽ không thể truy cập hệ thống.` 
+      text: isLocking
+        ? `Tài khoản ${staff.fullName} sẽ không thể truy cập hệ thống.`
         : `Tài khoản ${staff.fullName} sẽ được khôi phục quyền truy cập.`,
       icon: isLocking ? "warning" : "question",
       showCancelButton: true,
@@ -66,7 +71,7 @@ export default function StaffManage() {
       cancelButtonColor: "#7f8c8d",
       confirmButtonText: isLocking ? "Có, khóa tài khoản" : "Có, mở tài khóa",
       cancelButtonText: "Hủy",
-      reverseButtons: true
+      reverseButtons: true,
     });
 
     if (!result.isConfirmed) return;
@@ -85,14 +90,13 @@ export default function StaffManage() {
         title: isLocking ? "Đã khóa!" : "Đã mở khóa!",
         text: `Tài khoản nhân viên đã được cập nhật.`,
         timer: 1500,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
-
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Lỗi!",
-        text: error.message
+        text: error.message,
       });
     }
   };
@@ -107,7 +111,7 @@ export default function StaffManage() {
       cancelButtonColor: "#7f8c8d",
       confirmButtonText: "Xóa",
       cancelButtonText: "Hủy",
-      reverseButtons: true
+      reverseButtons: true,
     });
 
     if (!result.isConfirmed) return;
@@ -121,14 +125,13 @@ export default function StaffManage() {
         title: "Đã xóa!",
         text: "Đã được xóa thành công.",
         timer: 1500,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
-
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Lỗi!",
-        text: error.message
+        text: error.message,
       });
     }
   };
@@ -149,10 +152,7 @@ export default function StaffManage() {
 
       {/* Thanh tìm kiếm */}
       <div className="search-bar">
-        <input 
-          type="text" 
-          placeholder="Tìm kiếm theo tên, email..." 
-        />
+        <input type="text" placeholder="Tìm kiếm theo tên, email..." />
       </div>
 
       {/* Bảng dữ liệu */}
@@ -175,17 +175,25 @@ export default function StaffManage() {
                 <td>{staff.fullName}</td>
                 <td>{staff.email}</td>
                 <td>
-                  <span className={`status-badge ${staff.status === "ACTIVE" ? "active" : "inactive"}`}>
+                  <span
+                    className={`status-badge ${staff.status === "ACTIVE" ? "active" : "inactive"}`}
+                  >
                     {staff.status === "ACTIVE" ? "Hoạt động" : "Đã khóa"}
                   </span>
                 </td>
                 <td>{formatDate(staff.createdAt)}</td>
                 <td>
                   <div className="action-buttons">
-                    <button className={`btn-action ${staff.status === "ACTIVE" ? "lock" : "unlock"}`} onClick={() => handleToggleStatus(staff)}>
+                    <button
+                      className={`btn-action ${staff.status === "ACTIVE" ? "lock" : "unlock"}`}
+                      onClick={() => handleToggleStatus(staff)}
+                    >
                       {staff.status === "ACTIVE" ? "Khóa" : "Mở"}
                     </button>
-                    <button className="btn-action delete" onClick={() => handleDelete(staff.id)}>
+                    <button
+                      className="btn-action delete"
+                      onClick={() => handleDelete(staff.id)}
+                    >
                       Xóa
                     </button>
                   </div>

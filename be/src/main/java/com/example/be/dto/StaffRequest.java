@@ -1,8 +1,6 @@
 package com.example.be.dto;
 
-import com.example.be.entity.Staff;
-
-public class CreateStaffRequest {
+public class StaffRequest {
     private String fullName;
     private String email;
     private String password;

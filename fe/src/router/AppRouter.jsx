@@ -12,15 +12,14 @@ export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route path="/login" element={<Login />} />
 
         <Route element={<DashboardLayout />}>
-          <Route path="/" element = {<Dashboard />} />
-          <Route path="/staffs" element = {<StaffManage />} />
-          <Route path="/customers" element = {<CustomerManage />} />
-          <Route path="/products" element = {<ProductManage />} />
-          <Route path="/orders" element = {<OrderManage />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/staffs" element={<StaffManage />} />
+          <Route path="/customers" element={<CustomerManage />} />
+          <Route path="/products" element={<ProductManage />} />
+          <Route path="/orders" element={<OrderManage />} />
         </Route>
       </Routes>
     </BrowserRouter>

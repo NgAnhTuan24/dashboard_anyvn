@@ -1,12 +1,12 @@
 package com.example.be.mapper;
 
-import com.example.be.dto.CreateStaffRequest;
+import com.example.be.dto.StaffRequest;
 import com.example.be.dto.StaffResponse;
 import com.example.be.entity.Staff;
 
 public class StaffMapper {
 
-    public static Staff toEntity(CreateStaffRequest request) {
+    public static Staff toEntity(StaffRequest request) {
         Staff staff = new Staff();
         staff.setFullName(request.getFullName());
         staff.setEmail(request.getEmail());
@@ -16,7 +16,7 @@ public class StaffMapper {
         return staff;
     }
 
-    public static StaffResponse toResponse(Staff staff) {
+    public static StaffResponse toDTO(Staff staff) {
         if (staff == null) return null;
 
         StaffResponse response = new StaffResponse();

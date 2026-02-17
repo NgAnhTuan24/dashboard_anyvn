@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/staffs"
+const API_URL = "http://localhost:8080/api/staffs";
 
 export const getAllStaffApi = async () => {
   try {
@@ -8,8 +8,7 @@ export const getAllStaffApi = async () => {
     return response.data;
   } catch (error) {
     throw new Error(
-      error.response?.data?.message ||
-      "Không thể tải danh sách nhân viên"
+      error.response?.data?.message || "Không thể tải danh sách nhân viên",
     );
   }
 };
@@ -19,10 +18,7 @@ export const createStaffApi = async (payload) => {
     const response = await axios.post(API_URL, payload);
     return response.data;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message ||
-      "Tạo nhân viên thất bại"
-    );
+    throw new Error(error.response?.data?.message || "Tạo nhân viên thất bại");
   }
 };
 
@@ -31,10 +27,7 @@ export const lockStaffApi = async (id) => {
     const response = await axios.put(`${API_URL}/${id}/lock`);
     return response.data;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message ||
-      "Khóa nhân viên thất bại"
-    );
+    throw new Error(error.response?.data?.message || "Khóa nhân viên thất bại");
   }
 };
 
@@ -44,8 +37,7 @@ export const unlockStaffApi = async (id) => {
     return response.data;
   } catch (error) {
     throw new Error(
-      error.response?.data?.message ||
-      "Mở khóa nhân viên thất bại"
+      error.response?.data?.message || "Mở khóa nhân viên thất bại",
     );
   }
 };
@@ -54,9 +46,6 @@ export const deleteStaffApi = async (id) => {
   try {
     await axios.delete(`${API_URL}/${id}`);
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message ||
-      "Xóa nhân viên thất bại"
-    );
+    throw new Error(error.response?.data?.message || "Xóa nhân viên thất bại");
   }
 };

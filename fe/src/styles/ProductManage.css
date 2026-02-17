@@ -1,0 +1,7 @@
+/* Định dạng hình ảnh thumbnail */
+.admin-table img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid #eee;
+}

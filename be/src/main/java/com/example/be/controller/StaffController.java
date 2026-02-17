@@ -1,6 +1,6 @@
 package com.example.be.controller;
 
-import com.example.be.dto.CreateStaffRequest;
+import com.example.be.dto.StaffRequest;
 import com.example.be.dto.StaffResponse;
 import com.example.be.entity.Staff;
 import com.example.be.service.StaffService;
@@ -24,7 +24,7 @@ public class StaffController {
     }
 
     @PostMapping
-    public StaffResponse createStaff(@RequestBody CreateStaffRequest request) {
+    public StaffResponse createStaff(@RequestBody StaffRequest request) {
         return staffService.createStaff(request);
     }
 

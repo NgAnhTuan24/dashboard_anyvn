@@ -1,6 +1,6 @@
 package com.example.be.service;
 
-import com.example.be.dto.CreateStaffRequest;
+import com.example.be.dto.StaffRequest;
 import com.example.be.dto.LoginRequest;
 import com.example.be.dto.LoginResponse;
 import com.example.be.dto.StaffResponse;
@@ -27,11 +27,11 @@ public class StaffService {
         List<Staff> staffs = staffRepository.findByRole(Staff.Role.STAFF);
 
         return staffs.stream()
-                .map(StaffMapper::toResponse)
+                .map(StaffMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public StaffResponse createStaff(CreateStaffRequest request) {
+    public StaffResponse createStaff(StaffRequest request) {
 
         if (staffRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email đã tồn tại");
@@ -41,7 +41,7 @@ public class StaffService {
 
         Staff saved = staffRepository.save(staff);
 
-        return StaffMapper.toResponse(saved);
+        return StaffMapper.toDTO(saved);
     }
 
     public StaffResponse updateStatus(Long id, Staff.Status status) {
@@ -50,7 +50,7 @@ public class StaffService {
 
         staff.setStatus(status);
 
-        return StaffMapper.toResponse(staffRepository.save(staff));
+        return StaffMapper.toDTO(staffRepository.save(staff));
     }
 
     public void deleteStaff(Long id) {

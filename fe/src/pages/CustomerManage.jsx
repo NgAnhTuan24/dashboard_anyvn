@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getCustomersApi } from "../services/customerApi";
+import { getAllCustomersApi } from "../services/customerApi";
 import "../styles/CustomerManage.css";
 
 export default function CustomerManage() {
@@ -11,10 +11,10 @@ export default function CustomerManage() {
 
   const fetchCustomers = async () => {
     try {
-      const data = await getCustomersApi();
+      const data = await getAllCustomersApi();
       setCustomers(data);
     } catch (err) {
-      alert(err.message);
+      console.error(err.message);
     }
   };
 
@@ -25,9 +25,9 @@ export default function CustomerManage() {
       </div>
 
       <div className="search-bar">
-        <input 
-          type="text" 
-          placeholder="Tìm kiếm khách hàng theo tên, email, sđt..." 
+        <input
+          type="text"
+          placeholder="Tìm kiếm khách hàng theo tên, email, sđt..."
         />
       </div>
 
@@ -44,18 +44,16 @@ export default function CustomerManage() {
             </tr>
           </thead>
           <tbody>
-            {customers.map((item, index) => (
-              <tr key={item.id}>
+            {customers.map((customer, index) => (
+              <tr key={customer.id}>
                 <td>{index + 1}</td>
-                <td>{item.fullName}</td>
-                <td>{item.email}</td>
-                <td>{item.phoneNumber}</td>
-                <td>{item.address}</td>
+                <td>{customer.fullName}</td>
+                <td>{customer.email}</td>
+                <td>{customer.phoneNumber}</td>
+                <td>{customer.address}</td>
                 <td>
                   <div className="action-buttons">
-                    <button className="btn-action view">
-                      Xem chi tiết
-                    </button>
+                    <button className="btn-action view">Xem chi tiết</button>
                   </div>
                 </td>
               </tr>
