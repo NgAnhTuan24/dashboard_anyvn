@@ -4,6 +4,8 @@ import "../styles/CustomerManage.css";
 
 export default function CustomerManage() {
   const [customers, setCustomers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     fetchCustomers();
@@ -60,6 +62,32 @@ export default function CustomerManage() {
             ))}
           </tbody>
         </table>
+
+        <div className="pagination">
+          <button
+            className="page-nav"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            disabled={currentPage === 0}
+          >
+            ‹ Trước
+          </button>
+
+          <div className="page-info">
+            Trang <strong>{currentPage + 1}</strong> / {totalPages}
+          </div>
+
+          <button
+            className="page-nav"
+            onClick={() =>
+              setCurrentPage((prev) =>
+                prev < totalPages - 1 ? prev + 1 : prev,
+              )
+            }
+            disabled={currentPage >= totalPages - 1}
+          >
+            Sau ›
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -11,6 +11,8 @@ import "../styles/StaffManage.css";
 
 export default function StaffManage() {
   const [staffData, setStaffData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -146,13 +148,16 @@ export default function StaffManage() {
       <div className="page-header">
         <h1>Quản lý nhân viên</h1>
         <button className="btn-add" onClick={() => setIsOpenModal(true)}>
-          Thêm nhân viên
+          Thêm mới
         </button>
       </div>
 
       {/* Thanh tìm kiếm */}
       <div className="search-bar">
-        <input type="text" placeholder="Tìm kiếm theo tên, email..." />
+        <input
+          type="text"
+          placeholder="Tìm kiếm nhân viên theo tên, email..."
+        />
       </div>
 
       {/* Bảng dữ liệu */}
@@ -202,6 +207,32 @@ export default function StaffManage() {
             ))}
           </tbody>
         </table>
+
+        <div className="pagination">
+          <button
+            className="page-nav"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            disabled={currentPage === 0}
+          >
+            ‹ Trước
+          </button>
+
+          <div className="page-info">
+            Trang <strong>{currentPage + 1}</strong> / {totalPages}
+          </div>
+
+          <button
+            className="page-nav"
+            onClick={() =>
+              setCurrentPage((prev) =>
+                prev < totalPages - 1 ? prev + 1 : prev,
+              )
+            }
+            disabled={currentPage >= totalPages - 1}
+          >
+            Sau ›
+          </button>
+        </div>
       </div>
 
       {isOpenModal && (

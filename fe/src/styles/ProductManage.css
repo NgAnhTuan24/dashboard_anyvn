@@ -1,7 +1,50 @@
-/* Định dạng hình ảnh thumbnail */
 .admin-table img {
   width: 100px;
   height: 100px;
   object-fit: cover;
   border: 1px solid #eee;
+}
+
+.modal select {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.modal input[type="file"] {
+  padding: 8px;
+  background-color: #f8f9fa;
+  border: 1px dashed #cbd5e0;
+  cursor: pointer;
+}
+
+.image-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f1f2f6;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.preview-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
+}
+
+.modal-actions button[type="submit"]:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.uploading-text {
+  font-size: 12px;
+  color: #3498db;
+  margin-top: 5px;
+  font-weight: 600;
 }

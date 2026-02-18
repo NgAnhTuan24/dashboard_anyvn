@@ -10,7 +10,6 @@ public class ProductResponse {
     private String productName;
     private Double price;
     private int quantity;
-    private String description;
     private Product.Status status;
 
     public Long getId() {
@@ -59,14 +58,6 @@ public class ProductResponse {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Product.Status getStatus() {

@@ -48,11 +48,9 @@ body {
 .sidebar ul {
   list-style: none;
 }
-
 .sidebar ul li {
   transition: all 0.3s ease;
 }
-
 .sidebar ul li a {
   display: block;
   padding: 15px 25px;
@@ -62,18 +60,15 @@ body {
   font-weight: 500;
   transition: 0.3s;
 }
-
 .sidebar ul li:hover a {
   color: white;
   background-color: #34495e;
   padding-left: 35px;
 }
-
 .sidebar ul li.active {
   background-color: #3498db;
   border-left: 5px solid #fff;
 }
-
 .sidebar ul li.active a {
   color: white;
   font-weight: bold;
@@ -105,18 +100,15 @@ body {
   background-color: #3498db;
   color: white;
 }
-
 .login-style:hover {
   background-color: #2980b9;
   transform: translateY(-2px);
 }
-
 .logout-style {
   background-color: rgba(231, 76, 60, 0.1);
   color: #e74c3c;
   border: 1px solid #e74c3c;
 }
-
 .logout-style:hover {
   background-color: #e74c3c;
   color: white;
@@ -177,7 +169,6 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
-
 .admin-table {
   width: 100%;
   border-collapse: collapse;
@@ -250,20 +241,151 @@ body {
   color: white;
 }
 
-/* end */
+/* Overlay - Lớp nền mờ phủ toàn màn hình */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+/* Khung Modal chính */
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px; /* Độ rộng vừa phải cho form */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.3s ease-out; /* Hiệu ứng xuất hiện */
+}
+.modal h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+  text-align: center;
+  font-size: 24px;
+}
+/* Form bên trong Modal */
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-/* CSS cho Mobile (Tùy chọn ẩn sidebar nếu cần) */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 80px;
+.modal input,
+.modal select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.modal input:focus,
+.modal select:focus {
+  border-color: #3498db;
+}
+
+/* Nút hành động trong Modal */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+.modal-actions button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+/* Nút Hủy */
+.modal-actions button[type="button"] {
+  background-color: #ecf0f1;
+  color: #7f8c8d;
+}
+.modal-actions button[type="button"]:hover {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+}
+
+/* Nút Lưu */
+.modal-actions button[type="submit"] {
+  background-color: #3498db;
+  color: white;
+}
+.modal-actions button[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+/* Container của phân trang */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-top: 20px;
+}
+/* Các nút điều hướng (Trước/Sau) */
+.page-nav {
+  background-color: white;
+  color: #3498db;
+  border: 1px solid #3498db;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.page-nav:hover:not(:disabled) {
+  background-color: #3498db;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
+}
+/* Trạng thái nút bị vô hiệu hóa */
+.page-nav:disabled {
+  border-color: #dcdde1;
+  color: #bdc3c7;
+  cursor: not-allowed;
+  background-color: #f5f6fa;
+}
+/* Thông tin trang hiển thị ở giữa */
+.page-info {
+  font-size: 15px;
+  color: #2c3e50;
+  background: #f8f9fa;
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 1px solid #eee;
+}
+.page-info strong {
+  color: #3498db;
+  font-size: 16px;
+}
+
+/* Hiệu ứng xuất hiện từ trên xuống */
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
   }
-  .sidebar .logo,
-  .sidebar ul li a {
-    font-size: 10px;
-    text-align: center;
-    padding: 10px;
-  }
-  .content {
-    margin-left: 80px;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
+/* end */

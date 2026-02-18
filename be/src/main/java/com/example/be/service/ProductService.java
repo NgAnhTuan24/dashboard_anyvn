@@ -34,7 +34,6 @@ public class ProductService {
 
         Product product = ProductMapper.toEntity(request);
 
-        // Auto xử lý status theo quantity
         if (request.getQuantity() == 0) {
             product.setStatus(Product.Status.OUT_OF_STOCK);
         } else {
@@ -51,19 +50,16 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
 
-        product.setProductID(request.getProductID());
+//        product.setProductID(request.getProductID());
         product.setImageUrl(request.getImageUrl());
         product.setProductName(request.getProductName());
         product.setPrice(request.getPrice());
         product.setQuantity(request.getQuantity());
-        product.setDescription(request.getDescription());
 
-        // Nếu admin gửi status → dùng status đó
         if (request.getStatus() != null) {
             product.setStatus(request.getStatus());
         }
 
-        // Hoặc auto xử lý nếu không gửi status
         if (request.getStatus() == null) {
             if (product.getQuantity() == 0) {
                 product.setStatus(Product.Status.OUT_OF_STOCK);

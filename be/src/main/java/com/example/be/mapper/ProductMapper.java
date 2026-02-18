@@ -13,7 +13,6 @@ public class ProductMapper {
         product.setProductName(request.getProductName());
         product.setPrice(request.getPrice());
         product.setQuantity(request.getQuantity());
-        product.setDescription(request.getDescription());
         return product;
     }
 
@@ -25,7 +24,6 @@ public class ProductMapper {
         response.setProductName(product.getProductName());
         response.setPrice(product.getPrice());
         response.setQuantity(product.getQuantity());
-        response.setDescription(product.getDescription());
         response.setStatus(product.getStatus());
         return response;
     }
