@@ -5,10 +5,9 @@ import com.example.be.dto.ProductResponse;
 import com.example.be.entity.Product;
 import com.example.be.mapper.ProductMapper;
 import com.example.be.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -19,11 +18,22 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<ProductResponse> getAllProducts() {
-        return productRepository.findAll()
-                .stream()
-                .map(ProductMapper::toDTO)
-                .collect(Collectors.toList());
+    public Page<ProductResponse> getAllProducts(String keyword, Pageable pageable) {
+
+        Page<Product> page;
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            page = productRepository
+                    .findByProductIDContainingIgnoreCaseOrProductNameContainingIgnoreCase(
+                            keyword,
+                            keyword,
+                            pageable
+                    );
+        } else {
+            page = productRepository.findAll(pageable);
+        }
+
+        return page.map(ProductMapper::toDTO);
     }
 
     public ProductResponse createProduct(ProductRequest request) {

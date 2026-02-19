@@ -3,9 +3,9 @@ package com.example.be.controller;
 import com.example.be.dto.ProductRequest;
 import com.example.be.dto.ProductResponse;
 import com.example.be.service.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -18,8 +18,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductResponse> getAllProducts() {
-        return productService.getAllProducts();
+    public Page<ProductResponse> getAllProducts(
+            @RequestParam(required = false) String keyword,
+            Pageable pageable
+    ) {
+        return productService.getAllProducts(keyword, pageable);
     }
 
     @PostMapping

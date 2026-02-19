@@ -14,7 +14,7 @@ export default function StaffManage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [keyword, setKeyword] = useState("");
-  const pageSize = 10;
+  const pageSize = 9;
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",

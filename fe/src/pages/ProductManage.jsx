@@ -13,6 +13,8 @@ export default function ProductManage() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
+  const [keyword, setKeyword] = useState("");
+  const pageSize = 4;
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -30,13 +32,15 @@ export default function ProductManage() {
   });
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    fetchProducts(currentPage, keyword);
+  }, [currentPage, keyword]);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (page, searchKeyword) => {
     try {
-      const data = await getAllProductsApi();
-      setProducts(data);
+      const data = await getAllProductsApi(page, pageSize, searchKeyword);
+
+      setProducts(data.content);
+      setTotalPages(data.totalPages);
     } catch (error) {
       console.error(error.message);
     }
@@ -75,7 +79,7 @@ export default function ProductManage() {
       });
 
       resetForm();
-      fetchProducts();
+      fetchProducts(currentPage, keyword);
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -138,7 +142,7 @@ export default function ProductManage() {
         showConfirmButton: false,
       });
 
-      fetchProducts();
+      fetchProducts(currentPage, keyword);
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -188,7 +192,15 @@ export default function ProductManage() {
       </div>
 
       <div className="search-bar">
-        <input type="text" placeholder="Tìm kiếm sản phẩm theo mã, tên..." />
+        <input
+          type="text"
+          placeholder="Tìm kiếm sản phẩm theo mã, tên..."
+          value={keyword}
+          onChange={(e) => {
+            setCurrentPage(0);
+            setKeyword(e.target.value);
+          }}
+        />
       </div>
 
       <div className="table-responsive">
@@ -208,7 +220,7 @@ export default function ProductManage() {
           <tbody>
             {products.map((product, index) => (
               <tr key={product.id}>
-                <td>{index + 1}</td>
+                <td>{currentPage * pageSize + index + 1}</td>
                 <td>{product.productID}</td>
                 <td>
                   <img

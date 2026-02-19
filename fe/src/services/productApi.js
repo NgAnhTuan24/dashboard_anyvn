@@ -2,10 +2,12 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/products";
 
-export const getAllProductsApi = async () => {
+export const getAllProductsApi = async (page, size, keyword) => {
   try {
-    const respone = await axios.get(API_URL);
-    return respone.data;
+    const response = await axios.get(
+      `${API_URL}?page=${page}&size=${size}&keyword=${keyword || ""}`,
+    );
+    return response.data;
   } catch (error) {
     throw new Error(
       error.response?.data?.message || "Không thể tải danh sách sản phẩm",
