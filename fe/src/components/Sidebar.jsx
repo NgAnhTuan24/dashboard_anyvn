@@ -27,9 +27,9 @@ export default function Sidebar() {
   const menu = [
     { name: "Tổng quan", path: "/" },
     { name: "Quản lý nhân viên", path: "/staffs" },
-    { name: "Quản lý khách hàng", path: "/customers" },
+    // { name: "Quản lý khách hàng", path: "/customers" },
     { name: "Quản lý sản phẩm", path: "/products" },
-    { name: "Quản lý đơn hàng", path: "/orders" },
+    // { name: "Quản lý đơn hàng", path: "/orders" },
   ];
 
   return (

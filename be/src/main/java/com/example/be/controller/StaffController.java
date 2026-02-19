@@ -1,11 +1,13 @@
 package com.example.be.controller;
 
-import com.example.be.dto.CreateStaffRequest;
+import com.example.be.dto.StaffRequest;
 import com.example.be.dto.StaffResponse;
+import com.example.be.entity.Staff;
 import com.example.be.service.StaffService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/staffs")
@@ -18,17 +20,34 @@ public class StaffController {
     }
 
     @GetMapping
-    public List<StaffResponse> getAllStaffs() {
-        return staffService.getAllStaffs();
+    public Page<Staff> getAllStaff(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "9") int size,
+            @RequestParam(required = false) String keyword
+    ) {
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        return staffService.getAllStaff(keyword, pageable);
     }
 
     @PostMapping
-    public StaffResponse createStaff(@RequestBody CreateStaffRequest request) {
+    public StaffResponse createStaff(@RequestBody StaffRequest request) {
         return staffService.createStaff(request);
     }
 
+    @PutMapping("/{id}/lock")
+    public StaffResponse lockStaff(@PathVariable Long id) {
+        return staffService.updateStatus(id, Staff.Status.INACTIVE);
+    }
+
+    @PutMapping("/{id}/unlock")
+    public StaffResponse unlockStaff(@PathVariable Long id) {
+        return staffService.updateStatus(id, Staff.Status.ACTIVE);
+    }
+
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void deleteStaff(@PathVariable Long id) {
         staffService.deleteStaff(id);
     }
 }
