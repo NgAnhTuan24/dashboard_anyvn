@@ -6,7 +6,7 @@
   height: 100vh;
   width: 100vw;
   background-color: #f0f2f5;
-  position: fixed; /* Đảm bảo phủ toàn màn hình nếu nằm trong layout */
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;

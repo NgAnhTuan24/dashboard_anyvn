@@ -30,9 +30,9 @@ public class Product {
     private Status status = Status.ACTIVE;;
 
     public enum Status {
-        ACTIVE, // đang bán
-        OUT_OF_STOCK, // hết hàng
-        INACTIVE // ngừng kinh doanh
+        ACTIVE,
+        OUT_OF_STOCK,
+        INACTIVE
     }
 
     public Long getId() {

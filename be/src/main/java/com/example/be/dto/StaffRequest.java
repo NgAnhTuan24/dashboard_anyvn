@@ -4,8 +4,6 @@ public class StaffRequest {
     private String fullName;
     private String email;
     private String password;
-    // Xem xét chỉ có role là admin mới cho phép thiết lập role
-    //private Staff.Role role;
 
     public String getFullName() {
         return fullName;
@@ -30,12 +28,4 @@ public class StaffRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-
-//    public Staff.Role getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(Staff.Role role) {
-//        this.role = role;
-//    }
 }

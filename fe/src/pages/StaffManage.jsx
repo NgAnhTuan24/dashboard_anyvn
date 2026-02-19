@@ -7,7 +7,7 @@ import {
   unlockStaffApi,
   deleteStaffApi,
 } from "../services/staffApi";
-import "../styles/StaffManage.css";
+// import "../styles/StaffManage.css";
 
 export default function StaffManage() {
   const [staffData, setStaffData] = useState([]);
@@ -75,7 +75,7 @@ export default function StaffManage() {
         : `Tài khoản ${staff.fullName} sẽ được khôi phục quyền truy cập.`,
       icon: isLocking ? "warning" : "question",
       showCancelButton: true,
-      confirmButtonColor: isLocking ? "#f39c12" : "#3498db", // Màu cam cho Khóa, màu xanh cho Mở khóa
+      confirmButtonColor: isLocking ? "#f39c12" : "#3498db",
       cancelButtonColor: "#7f8c8d",
       confirmButtonText: isLocking ? "Có, khóa tài khoản" : "Có, mở tài khóa",
       cancelButtonText: "Hủy",
