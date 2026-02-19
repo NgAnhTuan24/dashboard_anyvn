@@ -7,6 +7,8 @@ import com.example.be.dto.StaffResponse;
 import com.example.be.entity.Staff;
 import com.example.be.mapper.StaffMapper;
 import com.example.be.repository.StaffRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,13 +24,15 @@ public class StaffService {
         this.staffRepository = staffRepository;
     }
 
-    public List<StaffResponse> getAllStaffs() {
+    public Page<Staff> getAllStaff(String keyword, Pageable pageable) {
 
-        List<Staff> staffs = staffRepository.findByRole(Staff.Role.STAFF);
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            return staffRepository
+                    .findByFullNameContainingIgnoreCaseOrEmailContainingIgnoreCase(
+                            keyword, keyword, pageable);
+        }
 
-        return staffs.stream()
-                .map(StaffMapper::toDTO)
-                .collect(Collectors.toList());
+        return staffRepository.findByRole(Staff.Role.STAFF, pageable);
     }
 
     public StaffResponse createStaff(StaffRequest request) {

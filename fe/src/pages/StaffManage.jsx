@@ -13,6 +13,8 @@ export default function StaffManage() {
   const [staffData, setStaffData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
+  const [keyword, setKeyword] = useState("");
+  const pageSize = 10;
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -21,15 +23,19 @@ export default function StaffManage() {
   });
 
   useEffect(() => {
-    fetchStaffs();
-  }, []);
+    fetchStaffs(currentPage, keyword);
+  }, [currentPage, keyword]);
 
-  const fetchStaffs = async () => {
+  const fetchStaffs = async (page, searchKeyword) => {
     try {
-      const data = await getAllStaffApi();
-      setStaffData(data);
+      const data = await getAllStaffApi(page, pageSize, searchKeyword);
+
+      console.log("API Response:", data);
+
+      setStaffData(data.content);
+      setTotalPages(data.totalPages);
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
     }
   };
 
@@ -49,7 +55,7 @@ export default function StaffManage() {
 
       setIsOpenModal(false);
       setFormData({ fullName: "", email: "", password: "" });
-      fetchStaffs();
+      fetchStaffs(currentPage, keyword);
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -85,7 +91,7 @@ export default function StaffManage() {
         await unlockStaffApi(staff.id);
       }
 
-      fetchStaffs();
+      fetchStaffs(currentPage, keyword);
 
       Swal.fire({
         icon: "success",
@@ -120,7 +126,7 @@ export default function StaffManage() {
 
     try {
       await deleteStaffApi(id);
-      fetchStaffs();
+      fetchStaffs(currentPage, keyword);
 
       Swal.fire({
         icon: "success",
@@ -144,7 +150,6 @@ export default function StaffManage() {
 
   return (
     <div className="staff-container">
-      {/* Header: Tiêu đề và nút Thêm */}
       <div className="page-header">
         <h1>Quản lý nhân viên</h1>
         <button className="btn-add" onClick={() => setIsOpenModal(true)}>
@@ -152,15 +157,18 @@ export default function StaffManage() {
         </button>
       </div>
 
-      {/* Thanh tìm kiếm */}
       <div className="search-bar">
         <input
           type="text"
           placeholder="Tìm kiếm nhân viên theo tên, email..."
+          value={keyword}
+          onChange={(e) => {
+            setCurrentPage(0);
+            setKeyword(e.target.value);
+          }}
         />
       </div>
 
-      {/* Bảng dữ liệu */}
       <div className="table-responsive">
         <table className="admin-table">
           <thead>
@@ -176,7 +184,7 @@ export default function StaffManage() {
           <tbody>
             {staffData.map((staff, index) => (
               <tr key={staff.id}>
-                <td>{index + 1}</td>
+                <td>{currentPage * pageSize + index + 1}</td>
                 <td>{staff.fullName}</td>
                 <td>{staff.email}</td>
                 <td>
