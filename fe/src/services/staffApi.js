@@ -1,12 +1,12 @@
-import axios from "axios";
+import axiosClient from "./axiosClient";
 
-const API_URL = "http://localhost:8080/api/staffs";
+const API_URL = "/api/staffs";
 
 export const getAllStaffApi = async (page, size, keyword) => {
-  const response = await axios.get(API_URL, {
+  const response = await axiosClient.get(API_URL, {
     params: {
-      page: page,
-      size: size,
+      page,
+      size,
       keyword: keyword || "",
     },
   });
@@ -15,38 +15,20 @@ export const getAllStaffApi = async (page, size, keyword) => {
 };
 
 export const createStaffApi = async (payload) => {
-  try {
-    const response = await axios.post(API_URL, payload);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.response?.data?.message || "Tạo nhân viên thất bại");
-  }
+  const response = await axiosClient.post(API_URL, payload);
+  return response.data;
 };
 
 export const lockStaffApi = async (id) => {
-  try {
-    const response = await axios.put(`${API_URL}/${id}/lock`);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.response?.data?.message || "Khóa nhân viên thất bại");
-  }
+  const response = await axiosClient.put(`${API_URL}/${id}/lock`);
+  return response.data;
 };
 
 export const unlockStaffApi = async (id) => {
-  try {
-    const response = await axios.put(`${API_URL}/${id}/unlock`);
-    return response.data;
-  } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Mở khóa nhân viên thất bại",
-    );
-  }
+  const response = await axiosClient.put(`${API_URL}/${id}/unlock`);
+  return response.data;
 };
 
 export const deleteStaffApi = async (id) => {
-  try {
-    await axios.delete(`${API_URL}/${id}`);
-  } catch (error) {
-    throw new Error(error.response?.data?.message || "Xóa nhân viên thất bại");
-  }
+  await axiosClient.delete(`${API_URL}/${id}`);
 };

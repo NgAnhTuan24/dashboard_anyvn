@@ -27,7 +27,7 @@ public class Staff {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.INACTIVE;
+    private Status status = Status.ACTIVE;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();;

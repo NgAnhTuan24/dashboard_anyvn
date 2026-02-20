@@ -1,0 +1,17 @@
+import { Navigate } from "react-router-dom";
+
+export default function ProtectedRoute({ children, allowedRoles }) {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  // Chưa login
+  if (!user || !user.token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // Có role yêu cầu nhưng không đủ quyền
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  return children;
+}

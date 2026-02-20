@@ -20,7 +20,7 @@ public class StaffController {
     }
 
     @GetMapping
-    public Page<Staff> getAllStaff(
+    public Page<StaffResponse> getAllStaff(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "9") int size,
             @RequestParam(required = false) String keyword

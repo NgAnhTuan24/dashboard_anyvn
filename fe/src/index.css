@@ -73,6 +73,27 @@ body {
   color: white;
   font-weight: bold;
 }
+
+.topbar {
+  height: 60px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.toggle-btn {
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sidebar.hide {
+  width: 0;
+  overflow: hidden;
+}
 /* end */
 
 /* phần nút đăng nhập/đăng xuất - start */
@@ -116,9 +137,19 @@ body {
 /* end */
 
 /* Content Area - Khu vực hiển thị nội dung */
-.content {
+.main {
   flex: 1;
   margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s;
+}
+
+.main.full {
+  margin-left: 0;
+}
+
+.content {
   padding: 30px;
   background-color: #f4f7f6;
 }
@@ -165,7 +196,7 @@ body {
 
 .table-responsive {
   background: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
@@ -334,7 +365,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 /* Các nút điều hướng (Trước/Sau) */
 .page-nav {

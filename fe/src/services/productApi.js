@@ -1,12 +1,17 @@
-import axios from "axios";
+import axiosClient from "./axiosClient";
+import axios from "axios"; // giữ lại cho Cloudinary
 
-const API_URL = "http://localhost:8080/api/products";
+const API_URL = "/api/products";
 
 export const getAllProductsApi = async (page, size, keyword) => {
   try {
-    const response = await axios.get(
-      `${API_URL}?page=${page}&size=${size}&keyword=${keyword || ""}`,
-    );
+    const response = await axiosClient.get(API_URL, {
+      params: {
+        page,
+        size,
+        keyword: keyword || "",
+      },
+    });
     return response.data;
   } catch (error) {
     throw new Error(
@@ -17,8 +22,8 @@ export const getAllProductsApi = async (page, size, keyword) => {
 
 export const createProductApi = async (payload) => {
   try {
-    const respone = await axios.post(API_URL, payload);
-    return respone.data;
+    const response = await axiosClient.post(API_URL, payload);
+    return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Thêm sản phẩm thất bại");
   }
@@ -26,7 +31,7 @@ export const createProductApi = async (payload) => {
 
 export const updateProductApi = async (id, payload) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, payload);
+    const response = await axiosClient.put(`${API_URL}/${id}`, payload);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Sửa thất bại");
@@ -35,7 +40,7 @@ export const updateProductApi = async (id, payload) => {
 
 export const deleteProductApi = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`);
+    const response = await axiosClient.delete(`${API_URL}/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Xóa sản phẩm thất bại");

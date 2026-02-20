@@ -28,7 +28,11 @@ export default function Login() {
 
       alert("Đăng nhập thành công");
 
-      navigate("/");
+      if (data.role === "ADMIN") {
+        navigate("/staffs");
+      } else {
+        navigate("/products");
+      }
     } catch (err) {
       alert(err.message);
     }

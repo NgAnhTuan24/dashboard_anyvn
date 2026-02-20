@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,13 +25,14 @@ export default function Sidebar() {
   };
 
   const menu = [
-    { name: "Tổng quan", path: "/" },
-    { name: "Quản lý nhân viên", path: "/staffs" },
+    ...(user?.role === "ADMIN"
+      ? [{ name: "Quản lý nhân viên", path: "/staffs" }]
+      : []),
     { name: "Quản lý sản phẩm", path: "/products" },
   ];
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${!isOpen ? "hide" : ""}`}>
       <h2 className="logo">Admin Page</h2>
 
       <ul className="menu-list">
