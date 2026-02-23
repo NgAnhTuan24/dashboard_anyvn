@@ -26,8 +26,6 @@ export default function Login() {
 
       localStorage.setItem("user", JSON.stringify(data));
 
-      alert("Đăng nhập thành công");
-
       if (data.role === "ADMIN") {
         navigate("/staffs");
       } else {
@@ -39,30 +37,50 @@ export default function Login() {
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Đăng nhập</h2>
+    <div className="login-page">
+      <div className="login-card">
+        <div className="login-banner">
+          <div className="banner-content">
+            <h1>Chào mừng trở lại!</h1>
+            <p>Đăng nhập để quản lý hệ thống của bạn một cách hiệu quả nhất.</p>
+          </div>
+        </div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
+        <div className="login-form-container">
+          <form className="login-form" onSubmit={handleSubmit}>
+            <h2>Đăng nhập</h2>
+            <p className="subtitle">Vui lòng nhập thông tin tài khoản</p>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Mật khẩu"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
+            <div className="input-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="example@gmail.com"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <button type="submit">Đăng nhập</button>
-      </form>
+            <div className="input-group">
+              <label>Mật khẩu</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <button type="submit" className="login-btn">
+              Đăng nhập ngay
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

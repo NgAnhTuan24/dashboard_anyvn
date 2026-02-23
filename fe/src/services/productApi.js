@@ -52,8 +52,8 @@ export const uploadImageToCloudinary = async (file) => {
 
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("upload_preset", "dashboardAny"); // tạo preset unsigned trên Cloudinary
-  formData.append("folder", "anysheet"); // folder optional
+  formData.append("upload_preset", "dashboardAny");
+  formData.append("folder", "anysheet");
 
   try {
     const res = await axios.post(

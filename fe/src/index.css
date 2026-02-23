@@ -10,13 +10,11 @@ body {
   color: #333;
 }
 
-/* Khung của cả trang dashboard */
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
-/* Phần Sidebar - start */
 .sidebar {
   width: 260px;
   background-color: #2c3e50;
@@ -94,9 +92,7 @@ body {
   width: 0;
   overflow: hidden;
 }
-/* end */
 
-/* phần nút đăng nhập/đăng xuất - start */
 .sidebar-footer {
   padding: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -134,9 +130,7 @@ body {
   background-color: #e74c3c;
   color: white;
 }
-/* end */
 
-/* Content Area - Khu vực hiển thị nội dung */
 .main {
   flex: 1;
   margin-left: 260px;
@@ -154,7 +148,6 @@ body {
   background-color: #f4f7f6;
 }
 
-/* Các phần css dùng chung - start */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -272,7 +265,6 @@ body {
   color: white;
 }
 
-/* Overlay - Lớp nền mờ phủ toàn màn hình */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -286,15 +278,14 @@ body {
   z-index: 1000;
   backdrop-filter: blur(3px);
 }
-/* Khung Modal chính */
 .modal {
   background: white;
   padding: 30px;
   border-radius: 12px;
   width: 100%;
-  max-width: 450px; /* Độ rộng vừa phải cho form */
+  max-width: 450px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  animation: slideDown 0.3s ease-out; /* Hiệu ứng xuất hiện */
+  animation: slideDown 0.3s ease-out;
 }
 .modal h2 {
   margin-bottom: 20px;
@@ -302,7 +293,6 @@ body {
   text-align: center;
   font-size: 24px;
 }
-/* Form bên trong Modal */
 .modal form {
   display: flex;
   flex-direction: column;
@@ -324,7 +314,6 @@ body {
   border-color: #3498db;
 }
 
-/* Nút hành động trong Modal */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -340,7 +329,6 @@ body {
   transition: 0.3s;
 }
 
-/* Nút Hủy */
 .modal-actions button[type="button"] {
   background-color: #ecf0f1;
   color: #7f8c8d;
@@ -350,7 +338,6 @@ body {
   color: #2c3e50;
 }
 
-/* Nút Lưu */
 .modal-actions button[type="submit"] {
   background-color: #3498db;
   color: white;
@@ -359,7 +346,6 @@ body {
   background-color: #2980b9;
 }
 
-/* Container của phân trang */
 .pagination {
   display: flex;
   justify-content: center;
@@ -367,7 +353,6 @@ body {
   gap: 20px;
   padding-top: 10px;
 }
-/* Các nút điều hướng (Trước/Sau) */
 .page-nav {
   background-color: white;
   color: #3498db;
@@ -387,14 +372,12 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
 }
-/* Trạng thái nút bị vô hiệu hóa */
 .page-nav:disabled {
   border-color: #dcdde1;
   color: #bdc3c7;
   cursor: not-allowed;
   background-color: #f5f6fa;
 }
-/* Thông tin trang hiển thị ở giữa */
 .page-info {
   font-size: 15px;
   color: #2c3e50;
@@ -408,7 +391,6 @@ body {
   font-size: 16px;
 }
 
-/* Hiệu ứng xuất hiện từ trên xuống */
 @keyframes slideDown {
   from {
     transform: translateY(-50px);
@@ -419,4 +401,3 @@ body {
     opacity: 1;
   }
 }
-/* end */
